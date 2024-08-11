@@ -1,0 +1,39 @@
+name: Build Contianers
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - v*
+
+jobs:
+  build:
+    concurrency:
+      group: container
+
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: "write"
+      contents: "read"
+      packages: write
+
+    steps:
+      - uses: docker/metadata-action@v5
+        id: meta
+        with:
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern=v{{major}}
+            type=semver,pattern=v{{major}}.{{minor}}
+            type=semver,pattern=v{{version}}
+
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - run: |-
+          for tag in $(jq -r '.tags[]' <<< "$DOCKER_METADATA_OUTPUT_JSON"); do
+            nix run .#container.copyTo --impure -- \
+              --dest-username ${{ github.actor}} \
+              --dest-password '${{ secrets.GITHUB_TOKEN }}' \
+              docker://ghcr.io/${GITHUB_REPOSITORY@L}:$tag
+          done
