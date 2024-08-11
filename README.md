@@ -3,7 +3,7 @@
 Fetch the latest sealing certificate from the [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets)
 API server and publish it to a Github repositiory.
 
-The certificate can then be used anyone to seal secrets without needing access to
+The certificate can then be used by anyone to seal secrets without needing access to
 the Kuberentes cluster (i.e. `kubeseal --cert ...`).
 
 # Usage
