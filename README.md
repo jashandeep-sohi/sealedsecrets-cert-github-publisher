@@ -46,7 +46,11 @@ spec:
 
                 # If using token (PAT) auth.
                 - name: GITHUB_TOKEN
-                  value: "...."
+                  valueFrom:
+                    secretKeyRef:
+                      name: sealedsecrets-cert-github-publisher
+                      key: GITHUB_TOKEN
+                      optional: false
 
                 # If using Github App, best practice is to create a new one, just for this application.
                 # It will require the following Repository permissions:
@@ -110,6 +114,7 @@ kind: Secret
 metatada:
   name: sealedsecrets-cert-github-publisher
 stringData:
+  GITHUB_TOKEN: "..."
   GITHUB_APP_PRIVATEKEY: |-
     <PEM encoded private key>
 ```
