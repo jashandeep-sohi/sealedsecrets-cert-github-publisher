@@ -1,6 +1,6 @@
 # sealedsecrets-cert-github-publisher
 
-Fetch the latest sealing certificate from the [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets)
+Fetch the latest sealing certificate from a [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets)
 API server and publish it to a Github repositiory.
 
 The certificate can then be used by anyone to seal secrets without needing access to
