@@ -77,7 +77,7 @@ octopilot \
   --github-auth-method "$GITHUB_AUTH" \
   --git-stage-all-changed=false \
   --repo "$GITHUB_REPO" \
-  --update "yq(file=$UPDATE_YAML_FILE,expression='$UPDATE_YAML_PATH_EXPRESSION = strenv(SS_CERT)',create=true)" \
+  --update "yq(file=$UPDATE_YAML_FILE,expression='$UPDATE_YAML_PATH_EXPRESSION',create=true)" \
   --git-stage-pattern "$UPDATE_YAML_FILE" \
   --git-commit-title "$COMMIT_TITLE" \
   --git-branch-prefix "$BRANCH_PREFIX" \
