@@ -79,8 +79,9 @@ spec:
                   value: "sealedsecrets/fn-config.yaml"
 
                 # yq expression (https://mikefarah.gitbook.io/yq/operators/traverse-read) to update in the file.
+                # Certificate is available in the `SS_CERT` environment variable.
                 - name: UPDATE_YAML_PATH_EXPRESSION
-                  value: ".data.cert"
+                  value: ".data.cert = strenv(SS_CERT)"
 
                 - name: COMMIT_TITLE
                   value: "chore: update sealedsecret cert"
