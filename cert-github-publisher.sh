@@ -33,13 +33,13 @@ if test -z "$GITHUB_REPO"; then
   exit 1
 fi
 
-if test -z "$UPDATE_YAML_FILE"; then
-  echo "UPDATE_YAML_FILE" not set.
+if test -z "$UPDATE_EXPRESSION"; then
+  echo "UPDATE_EXPRESSION" not set.
   exit 1
 fi
 
-if test -z "$UPDATE_YAML_PATH_EXPRESSION"; then
-  echo "UPDATE_YAML_PATH_EXPRESSION" not set.
+if test -z "$STAGE_PATTERN"; then
+  echo "STAGE_PATTERN" not set.
   exit 1
 fi
 
@@ -75,10 +75,10 @@ octopilot \
   --fail-on-error \
   --log-level debug \
   --github-auth-method "$GITHUB_AUTH" \
-  --git-stage-all-changed=false \
   --repo "$GITHUB_REPO" \
-  --update "yq(file=$UPDATE_YAML_FILE,expression='$UPDATE_YAML_PATH_EXPRESSION',create=true)" \
-  --git-stage-pattern "$UPDATE_YAML_FILE" \
+  --update "$UPDATE_EXPRESSION" \
+  --git-stage-all-changed=false \
+  --git-stage-pattern "$STAGE_PATTERN" \
   --git-commit-title "$COMMIT_TITLE" \
   --git-branch-prefix "$BRANCH_PREFIX" \
   --pr-labels "$PR_LABELS" \

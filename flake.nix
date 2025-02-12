@@ -9,8 +9,13 @@
     mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
 
     octopilot = {
-      url = "github:dailymotion-oss/octopilot/v1.12.10";
+      url = "github:dailymotion-oss/octopilot/v1.12.34";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    devenv-root = {
+      url = "file+file:///dev/null";
+      flake = false;
     };
 
   };
@@ -84,6 +89,10 @@
             # See https://devenv.sh/guides/using-with-flake-parts/#import-a-devenv-module
             # ./devenv-foo.nix
           ];
+
+          devenv.root = let
+            devenvRootFileContent = builtins.readFile inputs.devenv-root.outPath;
+          in pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
 
           # https://devenv.sh/reference/options/
           packages = [

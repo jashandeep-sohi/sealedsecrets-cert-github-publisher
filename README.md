@@ -74,14 +74,14 @@ spec:
                 - name: GITHUB_REPO
                   value: "<org>/<repo-name>"
 
-                # File to update in the repo
-                - name: UPDATE_YAML_FILE
-                  value: "sealedsecrets/fn-config.yaml"
+                # Octopilot update expression https://dailymotion-oss.github.io/octopilot/v1.12.34/index.html#updaters
+                # Certificate is available as in the `SS_CERT` envrionment variable or as file at `/tmp/cert.pem`
+                - name: UPDATE_EXPRESSION
+                  value: "yq(file=sealedsecrets/fn-config.yaml,create=true,expression='.data.cert = strenv(SS_CERT)')"
 
-                # yq expression (https://mikefarah.gitbook.io/yq/operators/traverse-read) to update in the file.
-                # Certificate is available in the `SS_CERT` environment variable.
-                - name: UPDATE_YAML_PATH_EXPRESSION
-                  value: ".data.cert = strenv(SS_CERT)"
+                # Any changed files to stage and commit
+                - name: STAGE_PATTERN
+                  value: "sealedsecrets/fn-config.yaml"
 
                 - name: COMMIT_TITLE
                   value: "chore: update sealedsecret cert"
