@@ -52,6 +52,18 @@
         "type": "github"
       }
     },
+    "devenv-root": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-d6xi4mKdjkX2JFicDIv5niSzpyI0m/Hnm8GGAIU04kY=",
+        "type": "file",
+        "url": "file:///dev/null"
+      },
+      "original": {
+        "type": "file",
+        "url": "file:///dev/null"
+      }
+    },
     "devenv_2": {
       "inputs": {
         "flake-compat": [
@@ -472,16 +484,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1722862625,
-        "narHash": "sha256-WyUWkkDCmpKppwnh8mtEcHVHjlaxWQ4H3IQyumwv720=",
+        "lastModified": 1738760905,
+        "narHash": "sha256-laSWJijWcnuJmEPseL52pp/t51ikJMSD7sSHMoEnzqA=",
         "owner": "dailymotion-oss",
         "repo": "octopilot",
-        "rev": "d1288117cf51ef31b3a1463a6440ae698462cbd6",
+        "rev": "a9cc33f1f84973eaf87e1a7598e9099cc4db7adf",
         "type": "github"
       },
       "original": {
         "owner": "dailymotion-oss",
-        "ref": "v1.12.10",
+        "ref": "v1.12.34",
         "repo": "octopilot",
         "type": "github"
       }
@@ -542,6 +554,7 @@
     "root": {
       "inputs": {
         "devenv": "devenv",
+        "devenv-root": "devenv-root",
         "flake-parts": "flake-parts",
         "mk-shell-bin": "mk-shell-bin",
         "nix2container": "nix2container",
