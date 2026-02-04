@@ -36,6 +36,7 @@
       let
         runtimeDeps = [
           pkgs.kubeseal
+          pkgs.coreutils
           inputs'.octopilot.packages.default
         ];
       in {
