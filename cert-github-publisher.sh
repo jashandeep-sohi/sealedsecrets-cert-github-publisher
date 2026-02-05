@@ -80,6 +80,7 @@ octopilot \
   --git-stage-all-changed=false \
   --git-stage-pattern "$STAGE_PATTERN" \
   --git-commit-title "$COMMIT_TITLE" \
+  --git-commit-footer '' \
   --git-branch-prefix "$BRANCH_PREFIX" \
   --pr-labels "$PR_LABELS" \
   --pr-assignees "$PR_ASSIGNEES" \
