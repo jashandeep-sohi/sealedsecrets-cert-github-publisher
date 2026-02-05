@@ -55,29 +55,22 @@
         packages.container =  let
           user = "nobody";
           group = "nobody";
-          uid = "1000";
-          gid = "1000";
-          tmp = pkgs.runCommand "tmp" {} ''
-            mkdir -p $out/tmp
-          '';
-          makeImageUser = pkgs.runCommand "mkUser" { } ''
-              mkdir -p $out/etc/pam.d
-              echo "${user}:x:${uid}:${gid}::" > $out/etc/passwd
-              echo "${user}:!x:::::::" > $out/etc/shadow
-              echo "${group}:x:${gid}:" > $out/etc/group
-              echo "${group}:x::" > $out/etc/gshadow
-          '';
+          alpine = inputs'.nix2container.packages.nix2container.pullImage {
+            imageName = "alpine";
+            imageDigest = "sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659";
+            arch = "amd64";
+            sha256 = "sha256-nMVDjf8Mgfx+A6x+98VLwMUhJtizi/Ln5yH7x1o4nUk=";
+          };
           package = config.packages.default;
         in with inputs'.nix2container.packages; nix2container.buildImage {
           name = "ghcr.io/jashandeep-sohi/sealedsecrets-cert-github-publisher";
           tag = "latest";
-          copyToRoot = [ makeImageUser tmp ];
-          perms = [
-            { path = makeImageUser; regex = ".*"; mode = "0664"; uname = "nobody"; gname = "nobody"; }
-            { path = tmp; regex = ".*"; mode = "0777"; }
-          ];
+          fromImage = alpine;
           config = {
             User = user;
+            runAsRoot = ''
+              addgroup -S ${group} && adduser -S ${user} -G ${group}
+            '';
             Entrypoint = [
                 "${package}/bin/${package.name}"
             ];
