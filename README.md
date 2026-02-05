@@ -29,14 +29,14 @@ spec:
               image: ghcr.io/jashandeep-sohi/sealedsecrets-cert-github-publisher:latest
               imagePullPolicy: Always
               env:
-                - name: SEALEDSECRET_CONTROLLER_NAMESPACE
+                - name: SEALEDSECRETS_CONTROLLER_NAMESPACE
                   value: "kube-system"
 
-                - name: SEALEDSECRET_CONTROLLER_NAME
+                - name: SEALEDSECRETS_CONTROLLER_NAME
                   value: "sealed-secrets-controller"
 
                 # If set, controller name and controller namespace are ignored, and the certificate is retrieved from this URL instead.
-                - name: SEALEDSECRET_CERT_URL
+                - name: SEALEDSECRETS_CERT_URL
                   value: ""
 
                 # Github authentication can be done via a PAT token or a Github App.
